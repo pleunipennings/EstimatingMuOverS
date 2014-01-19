@@ -31,8 +31,7 @@ for (mu in c(0.000002,0.00002,0.0002)){
 				x<-c(x,"do",
 					 "echo \"", "$seed", "$mu", "$cost",
 					 "$output_every_Xgen", "$numgen_inN", "$start_output",
-					 paste("\" | ./Code_and_shellscript/HIVevolution_HIV1site >./Code_and_shellscript/Link",cost,"_",seed,".txt",sep=""), 
-#			 paste("\" | ./HIVevolution_HIV1site >./Code_and_shellscript/Link",cost,"_",seed,".txt",sep=""), 
+					 paste("\" | ./Code_and_shellscript/HIVevolution_HIV1site >../Data/Link",cost,"_",seed,".txt",sep=""), 
 					 "done")
 				write(x,file="./Code_and_shellscript/tempscript.sh")
 				system("chmod 775 ./Code_and_shellscript/tempscript.sh")
@@ -40,7 +39,7 @@ for (mu in c(0.000002,0.00002,0.0002)){
 				system("./Code_and_shellscript/tempscript.sh")
 				
 #READ FREQS FILE
-				read.csv(paste("./Code_and_shellscript/Link",cost,"_",seed,".txt",sep=""),sep="\t",header=TRUE)->simdata
+				read.csv(paste("../Data/Link",cost,"_",seed,".txt",sep=""),sep="\t",header=TRUE)->simdata
 #in stead of the real frequencies, lets assume we have a sample from each patient of, say, 100, seqs. 
 				plot(c(0,0),col=0,xlim=c(-0.5,3.5),ylim=c(-1*mu/cost,8*mu/cost),xlab="Num Patients",xaxt="n",ylab="95% of observed average freq of allele",main=paste("Ne",Ne,", mu",mu,", Theta",2*Ne*mu ,", cost",cost))
 				axis(1, at=log10(samplesizes), labels=samplesizes)
@@ -51,7 +50,7 @@ for (mu in c(0.000002,0.00002,0.0002)){
 				for (i in 1:length(simdata$freq)){
 					simdata$est_freq[i]<-rbinom(1,num_seqs_per_patient,simdata$freq[i])/num_seqs_per_patient}
 				
-#system(paste("rm ","./Code_and_shellscript/Link",cost,"_",seed,".txt",sep=""))
+#system(paste("rm ","../Data/Link",cost,"_",seed,".txt",sep=""))
 				samplesizes<-c(1,3,10,30,100,300,1000)
 				for (num_patients in samplesizes){
 					list_averages<-vector()
