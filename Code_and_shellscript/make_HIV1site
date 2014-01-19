@@ -1,0 +1,1 @@
+g++ -o /Users/pleunipennings/Documents/Research/HIV/EstimatingSelCoeffSims/Code_and_shellscript/HIVevolution_HIV1site /Users/pleunipennings/Documents/Research/HIV/EstimatingSelCoeffSims/Code_and_shellscript/HIVevolution_HIV1site.cpp -lgsl -lm -lgslcblas
